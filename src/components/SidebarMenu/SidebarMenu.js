@@ -23,6 +23,7 @@ import {
   Support,
   LocalOffer,
   TrendingUp,
+  PhoneAndroid,
 } from "@mui/icons-material";
 import { Icon } from "@iconify/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,6 +34,7 @@ import styles from "./SidebarMenu.module.css";
 import LOGO from "../../assets/logo.png";
 import DARK_SIDEBAR_BG from "../../assets/dark-sidebar-bg.jpg";
 import LIGHT_SIDEBAR_BG from "../../assets/light-sidebar-bg.jpg";
+import CLICK_SOUND from "../../assets/click-sound-1.wav";
 
 const menuItems = [
   { title: "Home", path: "/", icon: <Home /> },
@@ -47,7 +49,7 @@ const menuItems = [
   {
     title: "Mobile Games",
     path: "/products?category=mobile-game",
-    icon: <Icon icon="mdi:cellphone-gaming" width={24} />,
+    icon: <PhoneAndroid />,
   },
   {
     title: "PC Games",
@@ -70,7 +72,7 @@ const menuItems = [
 const SidebarMenu = ({ open, onClose }) => {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
-  const { play } = useSound();
+  const { play } = useSound(CLICK_SOUND, 0.3);
 
   const handleNavigate = (path) => {
     play();
