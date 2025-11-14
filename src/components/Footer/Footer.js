@@ -6,30 +6,24 @@ import {
   Grid,
   Typography,
   TextField,
-  Button,
   IconButton,
-  Divider,
-  Link as MuiLink,
+  InputAdornment,
 } from "@mui/material";
 import {
   Facebook,
-  Twitter,
   Instagram,
-  YouTube,
-  LinkedIn,
-  Email,
-  Phone,
-  LocationOn,
-  ArrowForward,
+  Send,
 } from "@mui/icons-material";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import useSound from "../../hooks/useSound";
+import { useTheme } from "../../context/ThemeContext";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
   const navigate = useNavigate();
   const { play } = useSound();
+  const { isDarkMode } = useTheme();
   const [email, setEmail] = useState("");
 
   const handleNavigate = (path) => {
@@ -46,43 +40,38 @@ const Footer = () => {
     setEmail("");
   };
 
-  const footerLinks = {
-    products: [
-      { title: "Mobile Games", path: "/products?category=mobile-game" },
-      { title: "PC Games", path: "/products?category=pc-game" },
-      { title: "Console Games", path: "/products?category=console" },
-      { title: "Gift Cards", path: "/gift-cards" },
-      { title: "Top Up", path: "/top-up" },
-      { title: "Special Offers", path: "/products?filter=discount" },
-    ],
-    company: [
-      { title: "About Us", path: "/about" },
-      { title: "Careers", path: "/careers" },
-      { title: "Blog", path: "/blog" },
-      { title: "Press Kit", path: "/press" },
-      { title: "Partners", path: "/partners" },
-    ],
-    support: [
-      { title: "Help Center", path: "/help" },
-      { title: "Contact Us", path: "/contact" },
-      { title: "Track Order", path: "/track-order" },
-      { title: "Returns", path: "/returns" },
-      { title: "FAQs", path: "/faq" },
-    ],
-    legal: [
-      { title: "Privacy Policy", path: "/privacy" },
-      { title: "Terms of Service", path: "/terms" },
-      { title: "Cookie Policy", path: "/cookies" },
-      { title: "Refund Policy", path: "/refund" },
-    ],
+  const handleSocialClick = (url) => {
+    play();
+    window.open(url, "_blank");
   };
 
+  const footerLinks = [
+    { title: "Help Center", path: "/help" },
+    { title: "Privacy Policy", path: "/privacy" },
+    { title: "Terms of Service", path: "/terms" },
+    { title: "Cookie Policy", path: "/cookies" },
+    { title: "Refund Policy", path: "/refund" },
+  ];
+
   const socialLinks = [
-    { icon: <Facebook />, url: "https://facebook.com", color: "#1877f2" },
-    { icon: <Twitter />, url: "https://twitter.com", color: "#1da1f2" },
-    { icon: <Instagram />, url: "https://instagram.com", color: "#e4405f" },
-    { icon: <YouTube />, url: "https://youtube.com", color: "#ff0000" },
-    { icon: <LinkedIn />, url: "https://linkedin.com", color: "#0a66c2" },
+    {
+      icon: <Facebook />,
+      url: "https://facebook.com",
+      color: "#1877f2",
+      name: "Facebook"
+    },
+    {
+      icon: <Instagram />,
+      url: "https://instagram.com",
+      color: "#e4405f",
+      name: "Instagram"
+    },
+    {
+      icon: <Icon icon="mdi:telegram" />,
+      url: "https://telegram.org",
+      color: "#0088cc",
+      name: "Telegram"
+    },
   ];
 
   const paymentMethods = [
@@ -95,233 +84,128 @@ const Footer = () => {
   ];
 
   return (
-    <footer className={styles.footer}>
-      {/* Newsletter Section */}
-      <Box className={styles.newsletterSection}>
-        <Container maxWidth="lg">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={6}>
-                <Box className={styles.newsletterContent}>
-                  <Icon
-                    icon="mdi:email-newsletter"
-                    className={styles.newsletterIcon}
-                  />
-                  <Box>
-                    <Typography variant="h5" className={styles.newsletterTitle}>
-                      Subscribe to Our Newsletter
-                    </Typography>
-                    <Typography className={styles.newsletterSubtitle}>
-                      Get the latest deals, updates, and gaming news delivered
-                      to your inbox!
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className={styles.newsletterInput}
-                    InputProps={{
-                      endAdornment: (
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          className={styles.subscribeButton}
-                          endIcon={<ArrowForward />}
-                        >
-                          Subscribe
-                        </Button>
-                      ),
-                    }}
-                  />
-                </form>
-              </Grid>
-            </Grid>
-          </motion.div>
-        </Container>
-      </Box>
-
+    <footer className={styles.footer} data-theme={isDarkMode ? "dark" : "light"}>
       {/* Main Footer Content */}
       <Box className={styles.mainFooter}>
         <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            {/* Company Info */}
-            <Grid item xs={12} md={4} lg={3}>
+          <Grid container spacing={4} alignItems="flex-start">
+            {/* Company Info & Logo */}
+            <Grid item xs={12} sm={6} md={3}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className={styles.companySection}
+                transition={{ duration: 0.5 }}
               >
                 <Box className={styles.logoSection}>
-                  <Icon
-                    icon="ion:game-controller"
-                    className={styles.footerLogo}
-                  />
+                  <Icon icon="ion:game-controller" className={styles.footerLogo} />
                   <Typography variant="h5" className={styles.brandName}>
                     GameHub
                   </Typography>
                 </Box>
                 <Typography className={styles.companyDescription}>
-                  Your ultimate destination for gaming top-ups, gift cards, and
-                  the latest game releases. Fast, secure, and reliable.
+                  Your ultimate destination for gaming. Fast, secure, and reliable.
                 </Typography>
-                <Box className={styles.contactInfo}>
-                  <Box className={styles.contactItem}>
-                    <Email className={styles.contactIcon} />
-                    <Typography>support@gamehub.com</Typography>
-                  </Box>
-                  <Box className={styles.contactItem}>
-                    <Phone className={styles.contactIcon} />
-                    <Typography>+1 (555) 123-4567</Typography>
-                  </Box>
-                  <Box className={styles.contactItem}>
-                    <LocationOn className={styles.contactIcon} />
-                    <Typography>123 Gaming Street, CA 94102</Typography>
-                  </Box>
-                </Box>
               </motion.div>
             </Grid>
 
-            {/* Products Links */}
-            <Grid item xs={6} sm={6} md={2} lg={2}>
+            {/* Quick Links */}
+            <Grid item xs={12} sm={6} md={3}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Typography variant="h6" className={styles.footerColumnTitle}>
-                  Products
+                <Typography variant="h6" className={styles.sectionTitle}>
+                  Quick Links
                 </Typography>
                 <Box className={styles.footerLinks}>
-                  {footerLinks.products.map((link) => (
-                    <MuiLink
+                  {footerLinks.map((link) => (
+                    <motion.button
                       key={link.title}
-                      component="button"
                       onClick={() => handleNavigate(link.path)}
                       className={styles.footerLink}
+                      whileHover={{ x: 4 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       {link.title}
-                    </MuiLink>
+                    </motion.button>
                   ))}
                 </Box>
               </motion.div>
             </Grid>
 
-            {/* Company Links */}
-            <Grid item xs={6} sm={6} md={2} lg={2}>
+            {/* Newsletter */}
+            <Grid item xs={12} sm={6} md={3}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Typography variant="h6" className={styles.footerColumnTitle}>
-                  Company
+                <Typography variant="h6" className={styles.sectionTitle}>
+                  Newsletter
                 </Typography>
-                <Box className={styles.footerLinks}>
-                  {footerLinks.company.map((link) => (
-                    <MuiLink
-                      key={link.title}
-                      component="button"
-                      onClick={() => handleNavigate(link.path)}
-                      className={styles.footerLink}
-                    >
-                      {link.title}
-                    </MuiLink>
-                  ))}
-                </Box>
+                <Typography className={styles.newsletterText}>
+                  Get updates & deals
+                </Typography>
+                <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+                  <TextField
+                    fullWidth
+                    size="small"
+                    variant="outlined"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={styles.newsletterInput}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            type="submit"
+                            size="small"
+                            className={styles.subscribeButton}
+                            onClick={handleSubscribe}
+                          >
+                            <Send />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </form>
               </motion.div>
             </Grid>
 
-            {/* Support Links */}
-            <Grid item xs={6} sm={6} md={2} lg={2}>
+            {/* Follow Us */}
+            <Grid item xs={12} sm={6} md={3}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Typography variant="h6" className={styles.footerColumnTitle}>
-                  Support
+                <Typography variant="h6" className={styles.sectionTitle}>
+                  Follow Us
                 </Typography>
-                <Box className={styles.footerLinks}>
-                  {footerLinks.support.map((link) => (
-                    <MuiLink
-                      key={link.title}
-                      component="button"
-                      onClick={() => handleNavigate(link.path)}
-                      className={styles.footerLink}
+                <Box className={styles.socialIcons}>
+                  {socialLinks.map((social) => (
+                    <motion.div
+                      key={social.name}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      {link.title}
-                    </MuiLink>
-                  ))}
-                </Box>
-              </motion.div>
-            </Grid>
-
-            {/* Legal Links */}
-            <Grid item xs={6} sm={6} md={2} lg={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <Typography variant="h6" className={styles.footerColumnTitle}>
-                  Legal
-                </Typography>
-                <Box className={styles.footerLinks}>
-                  {footerLinks.legal.map((link) => (
-                    <MuiLink
-                      key={link.title}
-                      component="button"
-                      onClick={() => handleNavigate(link.path)}
-                      className={styles.footerLink}
-                    >
-                      {link.title}
-                    </MuiLink>
-                  ))}
-                </Box>
-
-                {/* Social Media */}
-                <Box className={styles.socialSection}>
-                  <Typography variant="h6" className={styles.socialTitle}>
-                    Follow Us
-                  </Typography>
-                  <Box className={styles.socialIcons}>
-                    {socialLinks.map((social, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.1, y: -3 }}
-                        whileTap={{ scale: 0.95 }}
+                      <IconButton
+                        className={styles.socialIcon}
+                        style={{ "--social-color": social.color }}
+                        onClick={() => handleSocialClick(social.url)}
+                        aria-label={social.name}
                       >
-                        <IconButton
-                          className={styles.socialIcon}
-                          style={{ "--social-color": social.color }}
-                          onClick={() => {
-                            play();
-                            window.open(social.url, "_blank");
-                          }}
-                        >
-                          {social.icon}
-                        </IconButton>
-                      </motion.div>
-                    ))}
-                  </Box>
+                        {social.icon}
+                      </IconButton>
+                    </motion.div>
+                  ))}
                 </Box>
               </motion.div>
             </Grid>
@@ -329,42 +213,29 @@ const Footer = () => {
         </Container>
       </Box>
 
-      <Divider className={styles.divider} />
-
-      {/* Bottom Footer */}
+      {/* Bottom Footer - Fixed Black Section */}
       <Box className={styles.bottomFooter}>
         <Container maxWidth="lg">
-          <Grid container spacing={3} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography className={styles.copyright}>
-                © {new Date().getFullYear()} GameHub. All rights reserved.
-                Built with <span className={styles.heart}>e</span> for gamers
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box className={styles.paymentMethods}>
-                <Typography className={styles.paymentTitle}>
-                  We Accept:
-                </Typography>
-                <Box className={styles.paymentIcons}>
-                  {paymentMethods.map((method, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      className={styles.paymentIcon}
-                    >
-                      <Icon icon={method} />
-                    </motion.div>
-                  ))}
-                </Box>
+          <Box className={styles.bottomContent}>
+            <Typography className={styles.copyright}>
+              Â© {new Date().getFullYear()} GameHub. All rights reserved.
+            </Typography>
+            <Box className={styles.paymentSection}>
+              <Typography className={styles.paymentTitle}>We Accept</Typography>
+              <Box className={styles.paymentIcons}>
+                {paymentMethods.map((method, index) => (
+                  <Box key={index} className={styles.paymentIcon}>
+                    <Icon icon={method} />
+                  </Box>
+                ))}
               </Box>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Container>
       </Box>
 
       {/* Scroll to Top Button */}
-      <motion.div
+      <motion.button
         className={styles.scrollTopButton}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -372,9 +243,10 @@ const Footer = () => {
           play();
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
+        aria-label="Scroll to top"
       >
         <Icon icon="mdi:arrow-up" />
-      </motion.div>
+      </motion.button>
     </footer>
   );
 };
