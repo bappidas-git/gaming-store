@@ -30,6 +30,10 @@ import { useTheme } from "../../context/ThemeContext";
 import useSound from "../../hooks/useSound";
 import styles from "./SidebarMenu.module.css";
 
+import LOGO from "../../assets/logo.png";
+import DARK_SIDEBAR_BG from "../../assets/dark-sidebar-bg.jpg";
+import LIGHT_SIDEBAR_BG from "../../assets/light-sidebar-bg.jpg";
+
 const menuItems = [
   { title: "Home", path: "/", icon: <Home /> },
   { title: "About Us", path: "/about", icon: <Info /> },
@@ -74,9 +78,7 @@ const SidebarMenu = ({ open, onClose }) => {
     onClose();
   };
 
-  const backgroundImage = isDarkMode
-    ? "/assets/dark-sidebar-bg.jpg"
-    : "/assets/light-sidebar-bg.jpg";
+  const backgroundImage = isDarkMode ? DARK_SIDEBAR_BG : LIGHT_SIDEBAR_BG;
 
   return (
     <Drawer
@@ -88,7 +90,10 @@ const SidebarMenu = ({ open, onClose }) => {
         className: styles.drawerPaper,
       }}
     >
-      <Box className={styles.container} data-theme={isDarkMode ? "dark" : "light"}>
+      <Box
+        className={styles.container}
+        data-theme={isDarkMode ? "dark" : "light"}
+      >
         {/* Background Image */}
         <Box
           className={styles.backgroundImage}
@@ -105,11 +110,7 @@ const SidebarMenu = ({ open, onClose }) => {
           {/* Header */}
           <Box className={styles.header}>
             <Box className={styles.logoSection}>
-              <img
-                src="/assets/logo.png"
-                alt="GameHub"
-                className={styles.logo}
-              />
+              <img src={LOGO} alt="GameHub" className={styles.logo} />
               <Typography variant="h5" className={styles.title}>
                 GameHub
               </Typography>

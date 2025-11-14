@@ -17,7 +17,7 @@ import { CartProvider } from "./context/CartContext";
 // Components
 import Header from "./components/Header/Header";
 import BottomNav from "./components/BottomNav/BottomNav";
-// import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 
 // Pages
 import Home from "./pages/Home/Home";
@@ -58,7 +58,7 @@ function App() {
                   </Routes>
                 </AnimatePresence>
               </main>
-              {/* <Footer /> */}
+              {<Footer />}
               <BottomNav />
             </div>
           </Router>
