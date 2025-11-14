@@ -88,7 +88,7 @@ const SidebarMenu = ({ open, onClose }) => {
         className: styles.drawerPaper,
       }}
     >
-      <Box className={styles.container}>
+      <Box className={styles.container} data-theme={isDarkMode ? "dark" : "light"}>
         {/* Background Image */}
         <Box
           className={styles.backgroundImage}
