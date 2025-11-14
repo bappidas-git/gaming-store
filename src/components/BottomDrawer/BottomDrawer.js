@@ -117,11 +117,16 @@ const BottomDrawer = ({ open, onClose }) => {
     onClose();
   };
 
+  const handleClose = () => {
+    play();
+    onClose();
+  };
+
   return (
     <SwipeableDrawer
       anchor="bottom"
       open={open}
-      onClose={onClose}
+      onClose={handleClose}
       onOpen={() => {}}
       className={styles.drawer}
       PaperProps={{
@@ -145,7 +150,7 @@ const BottomDrawer = ({ open, onClose }) => {
           <Typography variant="h6" className={styles.title}>
             Menu
           </Typography>
-          <IconButton onClick={onClose} className={styles.closeButton}>
+          <IconButton onClick={handleClose} className={styles.closeButton}>
             <Close />
           </IconButton>
         </Box>
