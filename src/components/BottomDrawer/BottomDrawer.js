@@ -26,6 +26,7 @@ import {
 } from "@mui/icons-material";
 import { Icon } from "@iconify/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
 import useSound from "../../hooks/useSound";
 import styles from "./BottomDrawer.module.css";
 
@@ -104,6 +105,7 @@ const menuSections = [
 
 const BottomDrawer = ({ open, onClose }) => {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
   const { play } = useSound();
 
   const handleNavigate = (path) => {
@@ -121,7 +123,7 @@ const BottomDrawer = ({ open, onClose }) => {
       onOpen={() => {}}
       className={styles.drawer}
       PaperProps={{
-        className: styles.drawerPaper,
+        className: `${styles.drawerPaper} ${isDarkMode ? styles.dark : styles.light}`,
         style: {
           height: "85vh",
           borderTopLeftRadius: "24px",
