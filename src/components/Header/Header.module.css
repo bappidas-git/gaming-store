@@ -143,16 +143,16 @@
 }
 
 .userMenu :global(.MuiPaper-root) {
-  background: rgba(26, 31, 58, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(102, 126, 234, 0.2);
   border-radius: 12px;
   min-width: 200px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .menuItem {
-  color: #ffffff;
+  color: #1a1f3a;
   padding: 12px 20px;
   transition: all 0.3s ease;
   position: relative;
@@ -168,14 +168,14 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(168, 85, 247, 0.2) 0%,
+    rgba(102, 126, 234, 0.15) 0%,
     transparent 100%
   );
   transition: width 0.3s ease;
 }
 
 .menuItem:hover {
-  background: rgba(168, 85, 247, 0.1);
+  background: rgba(102, 126, 234, 0.08);
 }
 
 .menuItem:hover::before {
@@ -251,4 +251,26 @@
 
 :global(.dark) .logo:hover {
   filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+}
+
+:global(.dark) .userMenu :global(.MuiPaper-root) {
+  background: rgba(26, 31, 58, 0.95);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .menuItem {
+  color: #ffffff;
+}
+
+:global(.dark) .menuItem::before {
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.2) 0%,
+    transparent 100%
+  );
+}
+
+:global(.dark) .menuItem:hover {
+  background: rgba(168, 85, 247, 0.1);
 }
