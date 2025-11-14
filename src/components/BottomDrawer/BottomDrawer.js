@@ -30,6 +30,8 @@ import { useTheme } from "../../context/ThemeContext";
 import useSound from "../../hooks/useSound";
 import styles from "./BottomDrawer.module.css";
 
+import LOGO from "../../assets/logo.png";
+
 const menuSections = [
   {
     title: "Quick Links",
@@ -123,7 +125,9 @@ const BottomDrawer = ({ open, onClose }) => {
       onOpen={() => {}}
       className={styles.drawer}
       PaperProps={{
-        className: `${styles.drawerPaper} ${isDarkMode ? styles.dark : styles.light}`,
+        className: `${styles.drawerPaper} ${
+          isDarkMode ? styles.dark : styles.light
+        }`,
         style: {
           height: "85vh",
           borderTopLeftRadius: "24px",
@@ -203,11 +207,7 @@ const BottomDrawer = ({ open, onClose }) => {
 
         {/* Footer */}
         <Box className={styles.footer}>
-          <img
-            src="/assets/logo.png"
-            alt="GameHub"
-            className={styles.footerLogo}
-          />
+          <img src={LOGO} alt="GameHub" className={styles.footerLogo} />
           <Typography className={styles.footerText}>GameHub © 2024</Typography>
         </Box>
       </Box>

@@ -8,6 +8,8 @@
   -webkit-backdrop-filter: blur(20px);
   padding-bottom: env(safe-area-inset-bottom);
   transition: all 0.3s ease;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 /* Light Mode */
@@ -227,4 +229,3 @@
     padding: 8px 16px !important;
   }
 }
-
