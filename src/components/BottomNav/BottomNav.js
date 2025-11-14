@@ -4,12 +4,14 @@ import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { Home, Info, ShoppingBag, Menu as MenuIcon } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
+import { useTheme } from "../../context/ThemeContext";
 import useSound from "../../hooks/useSound";
 import styles from "./BottomNav.module.css";
 
 const BottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDarkMode } = useTheme();
   const { play } = useSound();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -35,7 +37,7 @@ const BottomNav = () => {
 
   return (
     <>
-      <Paper className={`mobile-only ${styles.bottomNav}`} elevation={0}>
+      <Paper className={`mobile-only ${styles.bottomNav} ${isDarkMode ? styles.dark : styles.light}`} elevation={0}>
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
