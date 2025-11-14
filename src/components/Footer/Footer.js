@@ -9,11 +9,7 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import {
-  Facebook,
-  Instagram,
-  Send,
-} from "@mui/icons-material";
+import { Facebook, Instagram, Send } from "@mui/icons-material";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import useSound from "../../hooks/useSound";
@@ -58,19 +54,19 @@ const Footer = () => {
       icon: <Facebook />,
       url: "https://facebook.com",
       color: "#1877f2",
-      name: "Facebook"
+      name: "Facebook",
     },
     {
       icon: <Instagram />,
       url: "https://instagram.com",
       color: "#e4405f",
-      name: "Instagram"
+      name: "Instagram",
     },
     {
       icon: <Icon icon="mdi:telegram" />,
       url: "https://telegram.org",
       color: "#0088cc",
-      name: "Telegram"
+      name: "Telegram",
     },
   ];
 
@@ -84,7 +80,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer className={styles.footer} data-theme={isDarkMode ? "dark" : "light"}>
+    <footer
+      className={styles.footer}
+      data-theme={isDarkMode ? "dark" : "light"}
+    >
       {/* Main Footer Content */}
       <Box className={styles.mainFooter}>
         <Container maxWidth="lg">
@@ -98,13 +97,17 @@ const Footer = () => {
                 transition={{ duration: 0.5 }}
               >
                 <Box className={styles.logoSection}>
-                  <Icon icon="ion:game-controller" className={styles.footerLogo} />
+                  <Icon
+                    icon="ion:game-controller"
+                    className={styles.footerLogo}
+                  />
                   <Typography variant="h5" className={styles.brandName}>
                     GameHub
                   </Typography>
                 </Box>
                 <Typography className={styles.companyDescription}>
-                  Your ultimate destination for gaming. Fast, secure, and reliable.
+                  Your ultimate destination for gaming. Fast, secure, and
+                  reliable.
                 </Typography>
               </motion.div>
             </Grid>
@@ -147,10 +150,16 @@ const Footer = () => {
                 <Typography variant="h6" className={styles.sectionTitle}>
                   Newsletter
                 </Typography>
-                <Typography className={styles.newsletterText}>
+                <Typography
+                  className={styles.newsletterText}
+                  sx={{ marginTop: "1rem" }}
+                >
                   Get updates & deals
                 </Typography>
-                <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+                <form
+                  onSubmit={handleSubscribe}
+                  className={styles.newsletterForm}
+                >
                   <TextField
                     fullWidth
                     size="small"

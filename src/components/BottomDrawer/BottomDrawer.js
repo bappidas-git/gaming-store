@@ -111,8 +111,8 @@ const BottomDrawer = ({ open, onClose }) => {
   const { play } = useSound();
 
   const handleNavigate = (path) => {
-    if (path === "#") return;
     play();
+    if (path === "#") return;
     navigate(path);
     onClose();
   };
